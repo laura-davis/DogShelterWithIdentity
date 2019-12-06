@@ -1,20 +1,20 @@
+using DogShelter.Data;
+using DogShelter.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using DogShelter.Data;
-using DogShelter.Models;
 
 namespace DogShelter.Pages.Dogs
 {
     public class IndexModel : PageModel
     {
-        private readonly DogShelter.Data.ShelterContext _context;
+        private readonly ShelterContext _context;
 
-        public IndexModel(DogShelter.Data.ShelterContext context)
+        public IndexModel(ShelterContext context)
         {
             _context = context;
         }
@@ -24,25 +24,31 @@ namespace DogShelter.Pages.Dogs
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
-        public IList<Dog> Dog { get; set; }
+        public PaginatedList<Dog> Dogs { get; set; }
 
-        
-        public async Task OnGetAsync(string sortOrder, string searchString)
+        public async Task OnGetAsync(string sortOrder,
+            string currentFilter, string searchString, int? pageIndex)
         {
+            CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
-            
-            CurrentFilter = searchString;
-            
-            IQueryable<Dog> dogsIq = from d in _context.Dogs
-                select d;
-            
-            if (!String.IsNullOrEmpty(searchString))
+            if (searchString != null)
             {
-                dogsIq = dogsIq.Where(d => d.Name.Contains(searchString)
-                                                   || d.Name.Contains(searchString));
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
             }
 
+            CurrentFilter = searchString;
+
+            IQueryable<Dog> dogsIq = from s in _context.Dogs
+                                            select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dogsIq = dogsIq.Where(d => d.Name.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "name_desc":
@@ -59,7 +65,9 @@ namespace DogShelter.Pages.Dogs
                     break;
             }
 
-            Dog = await dogsIq.AsNoTracking().ToListAsync();
+            int pageSize = 3;
+            Dogs = await PaginatedList<Dog>.CreateAsync(
+                dogsIq.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }

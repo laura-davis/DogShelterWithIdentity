@@ -68,6 +68,7 @@
           <e p="_ValidationScriptsPartial.cshtml" t="Include" />
         </e>
       </e>
+      <e p="PaginatedList.cs" t="Include" />
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="launchSettings.json" t="Include" />

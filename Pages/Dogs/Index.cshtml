@@ -2,10 +2,10 @@
 @model DogShelter.Pages.Dogs.IndexModel
 
 @{
-    ViewData["Title"] = "Dogs";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Dogs</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -25,32 +25,34 @@
 <table class="table">
     <thead>
     <th>
-        <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
-            @Html.DisplayNameFor(model => model.Dog[0].Name)
+        <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+           asp-route-currentFilter="@Model.CurrentFilter">
+            @Html.DisplayNameFor(model => model.Dogs[0].Name)
         </a>
     </th>
     <th>
-        <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
-            @Html.DisplayNameFor(model => model.Dog[0].Dob)
+        <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+           asp-route-currentFilter="@Model.CurrentFilter">
+            @Html.DisplayNameFor(model => model.Dogs[0].Dob)
         </a>
     </th>
-
     <th>
-        @Html.DisplayNameFor(model => model.Dog[0].Breed)
+        @Html.DisplayNameFor(model => model.Dogs[0].Breed)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.Dog[0].Sex)
+        @Html.DisplayNameFor(model => model.Dogs[0].Sex)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.Dog[0].Summary)
+        @Html.DisplayNameFor(model => model.Dogs[0].Summary)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.Dog[0].ImageUrl)
+        @Html.DisplayNameFor(model => model.Dogs[0].ImageUrl)
     </th>
     <th></th>
+
     </thead>
     <tbody>
-    @foreach (var item in Model.Dog)
+    @foreach (var item in Model.Dogs)
     {
         <tr>
             <td>
@@ -80,3 +82,24 @@
     }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Dogs.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Dogs.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Dogs.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Dogs.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
+
