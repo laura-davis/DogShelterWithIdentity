@@ -20,8 +20,7 @@ namespace DogShelter.Pages.Dogs
             _context = context;
         }
 
-        [BindProperty]
-        public Dog Dog { get; set; }
+        [BindProperty] public Dog Dog { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,13 +35,32 @@ namespace DogShelter.Pages.Dogs
             {
                 return NotFound();
             }
+
             return Page();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
+            var dogToUpdate = await _context.Dogs.FindAsync(id);
+
+            if (dogToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Dog>(
+                dogToUpdate,
+                "dog",
+                d => d.Name, d => d.Breed, d=> d.Sex, d => d.Summary, d => d.ImageUrl, d => d.Adoptions))
+            
+                
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();

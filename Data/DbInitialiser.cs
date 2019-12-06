@@ -22,12 +22,12 @@ namespace DogShelter.Data
             {
                 new Dog
                 {
-                    Name = "Gizmo", Dob = DateTime.Parse("2012-12-25"), Breed = "Mixed", Sex = 'm',
+                    Name = "Gizmo", Dob = DateTime.Parse("2012-12-25"), Breed = "Mixed", Sex = "m",
                     Summary = "A cute and fluffy dog", ImageUrl = "www.gizmo.com/gizmo.jpg"
                 },
                 new Dog
                 {
-                    Name = "Dexter", Dob = DateTime.Parse("2016-02-14"), Breed = "Chow Chow", Sex = 'm',
+                    Name = "Dexter", Dob = DateTime.Parse("2016-02-14"), Breed = "Chow Chow", Sex = "m",
                     Summary = "Even fluffier!", ImageUrl = "www.dexter.com/dexter.jpg"
                 }
             };

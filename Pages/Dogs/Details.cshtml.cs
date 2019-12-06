@@ -28,7 +28,10 @@ namespace DogShelter.Pages.Dogs
                 return NotFound();
             }
 
-            Dog = await _context.Dogs.FirstOrDefaultAsync(m => m.ID == id);
+            Dog = await _context.Dogs
+                .Include(d => d.Adoptions)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Dog == null)
             {

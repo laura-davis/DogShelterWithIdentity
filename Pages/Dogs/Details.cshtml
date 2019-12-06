@@ -47,6 +47,28 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Dog.ImageUrl)
         </dd>
+        <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Dog.Adoptions)
+                </dt>
+                <dd class="col-sm-10">
+                    <table class="table">
+                        <tr>
+                            <th>Owner</th>
+                            <th>Adoption Date</th>
+                        </tr>
+                        @foreach (var item in Model.Dog.Adoptions)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.FirstName+ " " +item.User.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AdoptionDate)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </dd>
     </dl>
 </div>
 <div>

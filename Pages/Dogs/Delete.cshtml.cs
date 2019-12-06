@@ -19,22 +19,30 @@ namespace DogShelter.Pages.Dogs
             _context = context;
         }
 
-        [BindProperty]
-        public Dog Dog { get; set; }
+        [BindProperty] public Dog Dog { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Dog = await _context.Dogs.FirstOrDefaultAsync(m => m.ID == id);
+            Dog = await _context.Dogs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Dog == null)
             {
                 return NotFound();
             }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again";
+            }
+
             return Page();
         }
 
@@ -45,15 +53,25 @@ namespace DogShelter.Pages.Dogs
                 return NotFound();
             }
 
-            Dog = await _context.Dogs.FindAsync(id);
+            var dog = await _context.Dogs.FindAsync(id);
 
-            if (Dog != null)
+            if (dog == null)
             {
-                _context.Dogs.Remove(Dog);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
 
-            return RedirectToPage("./Index");
+            try
+            {
+                _context.Dogs.Remove(dog);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction("./Delete",
+                    new {id, saveChangesError = true});
+            }
         }
     }
 }
