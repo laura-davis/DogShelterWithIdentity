@@ -1,0 +1,60 @@
+@page
+@model DogShelter.Pages.Dogs.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Dog</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Dog.ID" />
+            <div class="form-group">
+                <label asp-for="Dog.Name" class="control-label"></label>
+                <input asp-for="Dog.Name" class="form-control" />
+                <span asp-validation-for="Dog.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Dob" class="control-label"></label>
+                <input asp-for="Dog.Dob" class="form-control" />
+                <span asp-validation-for="Dog.Dob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Breed" class="control-label"></label>
+                <input asp-for="Dog.Breed" class="form-control" />
+                <span asp-validation-for="Dog.Breed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Sex" class="control-label"></label>
+                <input asp-for="Dog.Sex" class="form-control" />
+                <span asp-validation-for="Dog.Sex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.Summary" class="control-label"></label>
+                <input asp-for="Dog.Summary" class="form-control" />
+                <span asp-validation-for="Dog.Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dog.ImageUrl" class="control-label"></label>
+                <input asp-for="Dog.ImageUrl" class="form-control" />
+                <span asp-validation-for="Dog.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

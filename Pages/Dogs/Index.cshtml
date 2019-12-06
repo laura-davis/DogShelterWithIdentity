@@ -1,0 +1,66 @@
+@page
+@model DogShelter.Pages.Dogs.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Dog[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dog[0].Dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dog[0].Breed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dog[0].Sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dog[0].Summary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dog[0].ImageUrl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Dog) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Breed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
