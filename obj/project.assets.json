@@ -8922,17 +8922,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/lda49/OneDrive - Sky/University/RiderProjects/DogShelter/DogShelter/DogShelter.csproj",
+      "projectUniqueName": "/Users/lda49/OneDrive - Sky/University/RiderProjects/DogShelter/DogShelter.csproj",
       "projectName": "DogShelter",
-      "projectPath": "/Users/lda49/OneDrive - Sky/University/RiderProjects/DogShelter/DogShelter/DogShelter.csproj",
+      "projectPath": "/Users/lda49/OneDrive - Sky/University/RiderProjects/DogShelter/DogShelter.csproj",
       "packagesPath": "/Users/lda49/.nuget/packages/",
-      "outputPath": "/Users/lda49/OneDrive - Sky/University/RiderProjects/DogShelter/DogShelter/obj/",
+      "outputPath": "/Users/lda49/OneDrive - Sky/University/RiderProjects/DogShelter/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/lda49/.nuget/NuGet/NuGet.Config"
+        "/Users/lda49/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
@@ -9004,16 +9004,7 @@
           "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.0.100/RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   }

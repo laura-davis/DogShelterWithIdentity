@@ -30,7 +30,7 @@ namespace DogShelter.Pages.Dogs
                 return NotFound();
             }
 
-            Dog = await _context.Dog.FirstOrDefaultAsync(m => m.ID == id);
+            Dog = await _context.Dogs.FirstOrDefaultAsync(m => m.ID == id);
 
             if (Dog == null)
             {
@@ -71,7 +71,7 @@ namespace DogShelter.Pages.Dogs
 
         private bool DogExists(int id)
         {
-            return _context.Dog.Any(e => e.ID == id);
+            return _context.Dogs.Any(e => e.ID == id);
         }
     }
 }

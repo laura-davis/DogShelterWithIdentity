@@ -23,7 +23,7 @@ namespace DogShelter.Pages.Dogs
 
         public async Task OnGetAsync()
         {
-            Dog = await _context.Dog.ToListAsync();
+            Dog = await _context.Dogs.ToListAsync();
         }
     }
 }

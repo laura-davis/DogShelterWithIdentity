@@ -29,7 +29,7 @@ namespace DogShelter.Pages.Dogs
                 return NotFound();
             }
 
-            Dog = await _context.Dog.FirstOrDefaultAsync(m => m.ID == id);
+            Dog = await _context.Dogs.FirstOrDefaultAsync(m => m.ID == id);
 
             if (Dog == null)
             {
@@ -45,11 +45,11 @@ namespace DogShelter.Pages.Dogs
                 return NotFound();
             }
 
-            Dog = await _context.Dog.FindAsync(id);
+            Dog = await _context.Dogs.FindAsync(id);
 
             if (Dog != null)
             {
-                _context.Dog.Remove(Dog);
+                _context.Dogs.Remove(Dog);
                 await _context.SaveChangesAsync();
             }
 

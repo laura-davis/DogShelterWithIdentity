@@ -36,7 +36,7 @@ namespace DogShelter.Pages.Dogs
                 return Page();
             }
 
-            _context.Dog.Add(Dog);
+            _context.Dogs.Add(Dog);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
