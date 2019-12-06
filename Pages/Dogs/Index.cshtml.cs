@@ -26,13 +26,22 @@ namespace DogShelter.Pages.Dogs
 
         public IList<Dog> Dog { get; set; }
 
-        public async Task OnGetAsync(string sortOrder)
+        
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
-
+            
+            CurrentFilter = searchString;
+            
             IQueryable<Dog> dogsIq = from d in _context.Dogs
                 select d;
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dogsIq = dogsIq.Where(d => d.Name.Contains(searchString)
+                                                   || d.Name.Contains(searchString));
+            }
 
             switch (sortOrder)
             {
